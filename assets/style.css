@@ -216,6 +216,21 @@ section { position: relative; }
   .island-nav { bottom: 14px; }
 }
 
+@media (max-width: 768px) {
+  .island-nav {
+    gap: 0;
+    padding: 6px;
+  }
+
+  .island-item {
+    padding: 11px;
+  }
+
+  .island-item span {
+    display: none;
+  }
+}
+
 /* ============== Buttons ============== */
 .btn {
   display: inline-flex;
