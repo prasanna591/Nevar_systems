@@ -212,11 +212,19 @@ section { position: relative; }
 .island-item.active { color: var(--bg); background: var(--amber); }
 .island-item.active:hover { color: var(--bg); }
 
+.island-nav.icon-only .island-item {
+  padding: 11px;
+}
+
+.island-nav.icon-only .island-item span {
+  display: none;
+}
+
 @media (max-width: 480px) {
   .island-nav { bottom: 14px; }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 768px), (hover: none) and (pointer: coarse) {
   .island-nav {
     gap: 0;
     padding: 6px;

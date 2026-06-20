@@ -7,8 +7,12 @@ document.addEventListener('DOMContentLoaded', () => {
   /* ---------- Dynamic Island Nav: shrink on scroll ---------- */
   const islandNav = document.querySelector('.island-nav');
   if (islandNav) {
-    let lastY = window.scrollY;
     let ticking = false;
+    const isTouchLike = window.matchMedia('(hover: none), (pointer: coarse)').matches;
+
+    if (isTouchLike) {
+      islandNav.classList.add('icon-only');
+    }
 
     const updateNav = () => {
       const y = window.scrollY;
@@ -17,7 +21,6 @@ document.addEventListener('DOMContentLoaded', () => {
       } else {
         islandNav.classList.remove('shrink');
       }
-      lastY = y;
       ticking = false;
     };
 
@@ -28,11 +31,13 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }, { passive: true });
 
-    // Expand on hover/focus even if shrunk
-    islandNav.addEventListener('mouseenter', () => islandNav.classList.remove('shrink'));
-    islandNav.addEventListener('mouseleave', () => {
-      if (window.scrollY > 80) islandNav.classList.add('shrink');
-    });
+    if (!isTouchLike) {
+      // Expand on hover/focus even if shrunk
+      islandNav.addEventListener('mouseenter', () => islandNav.classList.remove('shrink'));
+      islandNav.addEventListener('mouseleave', () => {
+        if (window.scrollY > 80) islandNav.classList.add('shrink');
+      });
+    }
   }
 
   /* ---------- Scroll reveal ---------- */
