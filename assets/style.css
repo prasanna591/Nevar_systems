@@ -7,7 +7,7 @@
 
 :root {
   /* Colors */
-  --bg: #0D0F12;
+  /* --bg: #0D0F12;
   --bg-raised: #15181D;
   --bg-card: #181B20;
   --line: #262B33;
@@ -16,7 +16,88 @@
   --amber-deep: #E57C23;
   --cream: #F7F4EF;
   --muted: #8A8F98;
-  --muted-dim: #5C616B;
+  --muted-dim: #5C616B; default dark mode */
+
+
+  
+  /* --bg: #F8F9FA;
+  --bg-raised: #FFFFFF;
+  --bg-card: #F1F3F5;
+  --line: #DDE1E5;
+  --line-soft: #E9ECEF;
+  --amber: #228BE6;       
+  --amber-deep: #1C7ED6;  
+  --cream: #1A1B1F;       
+  --muted: #68707C;
+  --muted-dim: #A1A8B3; blue and white theme for light mode */
+  
+  /* --bg: #F2F7F4;
+  --bg-raised: #FFFFFF;
+  --bg-card: #E5EDE9;
+  --line: #C7D7CE;
+  --line-soft: #DDE7E1;
+  --amber: #00875A;       
+  --amber-deep: #005238;  
+  --cream: #091E15;       
+  --muted: #5A6B63;
+  --muted-dim: #8FA398; green and white theme for light mode */
+ 
+/* --bg: #F5F3F7;
+  --bg-raised: #FFFFFF;
+  --bg-card: #ECE9F1;
+  --line: #D3CADC;
+  --line-soft: #E4DDEB;
+  --amber: #9C27B0;       
+  --amber-deep: #E91E63;  
+  --cream: #120E16;       
+  --muted: #6F6478;
+  --muted-dim: #A59AAE; pink and white theme for light mode  */
+
+  
+  /* Colors */
+  /* --bg: #FAF6EE;
+  --bg-raised: #FFFDF9;
+  --bg-card: #F1EAE0;
+  --line: #DBD1C2;
+  --line-soft: #E7DFD3;
+  --amber: #A63A50;       
+  --amber-deep: #2A324B;  
+  --cream: #1A1813;       
+  --muted: #70695E;
+  --muted-dim: #A39B8F; vintage warm theme for light mode  */
+
+  /* --nav-bg: rgba(255, 255, 255, 0.72);  */
+  /* --nav-shadow: 0 10px 40px rgba(0, 0, 0, 0.08), 0 4px 12px rgba(0, 0, 0, 0.04); */
+  
+  
+  /* --bg: #F5F6F8;          
+  --bg-raised: #FFFFFF;
+  --bg-card: #EAECEF;     
+  --line: #CED4DA;
+  --line-soft: #E9ECEF;
+  --amber: #FF5A00;       
+  --amber-deep: #D03E00;   
+  --cream: #111418;      
+  --muted: #6C757D;
+  --muted-dim: #ADB5BD;
+  
+  --nav-bg: rgba(255, 255, 255, 0.75);
+  --nav-shadow: 0 10px 40px rgba(17, 20, 24, 0.08); orange and white theme fo
+r light mode 
+  
+   /* --bg: #F0F4F8;           
+  --bg-raised: #FFFFFF;
+  --bg-card: #E1E8F0;     
+  --line: #C8D6E5;
+  --line-soft: #ECF0F4;
+  --amber: #00A8FF;       
+  --amber-deep: #007CE0;  
+  --cream: #0F172A;      
+  --muted: #64748B;
+  --muted-dim: #94A3B8;
+*/
+  --nav-bg: rgba(255, 255, 255, 0.75);
+  --nav-shadow: 0 10px 40px rgba(15, 23, 42, 0.06); 
 
   /* Type */
   --font-display: 'Space Grotesk', sans-serif;
@@ -174,17 +255,25 @@ section { position: relative; }
   align-items: center;
   gap: 2px;
   padding: 7px;
-  background: rgba(21, 24, 29, 0.72);
+  
+  /* UPDATED: Uses responsive token for background blur */
+  background: var(--nav-bg);
   backdrop-filter: blur(16px) saturate(140%);
   -webkit-backdrop-filter: blur(16px) saturate(140%);
-  border: 1px solid rgba(247, 244, 239, 0.08);
-  border-radius: 999px;
-  box-shadow: 0 10px 40px rgba(0,0,0,0.45), 0 0 0 1px rgba(0,0,0,0.2);
+  
+  /* UPDATED: Uses soft line token instead of hardcoded white alpha */
+  border: 1px solid var(--line-soft);
+  
+  /* UPDATED: Uses responsive shadow token */
+  box-shadow: var(--nav-shadow);
+  
   transition: gap .35s var(--ease), padding .35s var(--ease), transform .4s var(--ease);
 }
+
 .island-nav.shrink {
   gap: 0;
 }
+
 .island-item {
   position: relative;
   display: flex;
@@ -199,19 +288,43 @@ section { position: relative; }
   white-space: nowrap;
   transition: background .25s var(--ease), color .25s var(--ease);
 }
-.island-item svg { width: 17px; height: 17px; flex-shrink: 0; }
-.island-item span { transition: opacity .25s var(--ease), width .25s var(--ease); }
+
+.island-item svg { 
+  width: 17px; 
+  height: 17px; 
+  flex-shrink: 0; 
+}
+
+.island-item span { 
+  transition: opacity .25s var(--ease), width .25s var(--ease); 
+}
+
 .island-nav.shrink .island-item span {
   width: 0;
   opacity: 0;
   overflow: hidden;
   display: inline-block;
 }
-.island-nav.shrink .island-item { padding: 11px; }
-.island-item:hover { color: var(--cream); background: rgba(255,255,255,0.06); }
-.island-item.active { color: var(--bg); background: var(--amber); }
-.island-item.active:hover { color: var(--bg); }
 
+.island-nav.shrink .island-item { 
+  padding: 11px; 
+}
+
+/* UPDATED: Hover state uses main dark text color (var(--cream)) and background card color for contrast */
+.island-item:hover { 
+  color: var(--cream); 
+  background: var(--bg-card); 
+}
+
+/* UPDATED: Active state retains full contrast irrespective of background */
+.island-item.active { 
+  color: var(--bg); 
+  background: var(--amber); 
+}
+
+.island-item.active:hover { 
+  color: var(--bg); 
+}
 .island-nav.icon-only .island-item {
   padding: 11px;
 }

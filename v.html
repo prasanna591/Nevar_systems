@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nevar Systems — Advanced Aerial Intelligence</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-main: #FFFFFF;
+            --bg-surface: rgba(248, 250, 252, 0.8);
+            --bg-card: #FFFFFF;
+            --brand-primary: #0052CC;
+            --brand-accent: #00E5FF;
+            --brand-gradient: linear-gradient(135deg, #0052CC 0%, #00E5FF 100%);
+            --text-main: #0F172A;
+            --text-muted: #475569;
+            --border-light: rgba(0, 82, 204, 0.1);
+            --border-accent: rgba(0, 229, 255, 0.3);
+            --shadow-sm: 0 4px 12px rgba(0, 82, 204, 0.03);
+            --shadow-md: 0 10px 30px -10px rgba(0, 82, 204, 0.08);
+            --shadow-glow: 0 0 20px rgba(0, 229, 255, 0.2);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        /* --- PREMIUM ENGINEERING GRID BACKGROUND --- */
+    body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-main);
+    color: var(--text-main);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    
+    /* NEW ENHANCED GRID: Increased opacity to 6% and 4% for a cross-matrix feel */
+    background-image: 
+        linear-gradient(to right, rgba(0, 82, 204, 0.06) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(0, 82, 204, 0.06) 1px, transparent 1px),
+        linear-gradient(to right, rgba(0, 82, 204, 0.03) 2px, transparent 2px),
+        linear-gradient(to bottom, rgba(0, 82, 204, 0.03) 2px, transparent 2px);
+    background-size: 40px 40px, 40px 40px, 200px 200px, 200px 200px;
+    background-position: center top;
+}
+
+        h1, h2, h3, h4 {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            letter-spacing: -0.02em;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 40px;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* --- STICKY MODERN HEADER --- */
+        header {
+            border-bottom: 1px solid var(--border-light);
+            padding: 0px 0;
+            position: sticky;
+            top: 0;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            z-index: 1000;
+        }
+        .nav-container { display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 22px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.03em; color: var(--text-main); }
+        
+        /* Gradient Text Animation */
+        .text-gradient {
+            background: var(--brand-gradient);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: flowGradient 5s ease infinite;
+        }
+
+        @keyframes flowGradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* --- BUTTONS WITH GLOW STATES --- */
+        .btn-flex { display: flex; gap: 16px; }
+        .btn { padding: 14px 28px; font-weight: 600; border-radius: 8px; text-decoration: none; font-size: 15px; transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); display: inline-flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
+        
+        .btn-primary { 
+            background: var(--brand-gradient); 
+            background-size: 200% auto;
+            color: #FFF; 
+            box-shadow: 0 4px 14px rgba(0, 82, 204, 0.2); 
+            border: none;
+        }
+        .btn-primary:hover { 
+            background-position: right center;
+            transform: translateY(-2px); 
+            box-shadow: 0 8px 24px rgba(0, 229, 255, 0.35); 
+        }
+        
+        .btn-secondary { border: 1px solid var(--brand-primary); color: var(--brand-primary); background: rgba(255,255,255,0.5); backdrop-filter: blur(4px); }
+        .btn-secondary:hover { background: var(--border-light); transform: translateY(-2px); }
+
+        /* --- HERO INTERACTIVE DASHBOARD LAYOUT --- */
+        .hero-section { padding: 100px 0 80px 0; position: relative; }
+        
+        /* Ambient Background Glow */
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 20%;
+            left: 50%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(0, 229, 255, 0.05) 0%, rgba(255,255,255,0) 70%);
+            transform: translate(-50%, -50%);
+            z-index: 0;
+            pointer-events: none;
+        } 
+
+        .hero-grid { display: grid; grid-template-columns: 1.1fr 0.9fr;  gap: 60px; align-items: center; }
+        .hero-content { animation: fadeUp 0.8s ease-out forwards; position: relative; z-index: 3; }
+        .hero-content h1 { font-size: 68px; line-height: 1.05; color: #ffffff; font-weight: 800; margin-bottom: 16px; }
+        .tagline { font-size: 20px; font-weight: 600; margin-bottom: 24px; display: inline-block; letter-spacing: 0.02em; color: rgba(255,255,255,0.95); }
+        .hero-content p { font-size: 18px; margin-bottom: 40px; color: rgba(255,255,255,0.85); max-width: 540px; }
+        
+        /* Floating Tech Visualization */
+        .hero-visual { position: relative; background: rgba(255, 255, 255, 0.6); backdrop-filter: blur(10px); border: 1px solid var(--border-light); border-radius: 20px; height: 460px; box-shadow: var(--shadow-md); display: flex; align-items: center; justify-content: center; animation: float 6s ease-in-out infinite; } 
+         .panel-overlay { position: absolute; bottom: -20px; left: -20px; background: rgba(255,255,255,0.95); backdrop-filter: blur(12px); padding: 24px; border-radius: 14px; box-shadow: 0 20px 40px rgba(15,23,42,0.08); border: 1px solid var(--border-light); width: 260px; transition: transform 0.3s ease; }
+        .panel-overlay:hover { transform: translateY(-5px) scale(1.02); box-shadow: var(--shadow-glow); }
+        .panel-line { height: 4px; background: var(--brand-gradient); width: 40%; margin-bottom: 12px; border-radius: 2px; }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-12px); box-shadow: 0 20px 40px -10px rgba(0, 82, 204, 0.12); }
+            100% { transform: translateY(0px); }
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- SCANNABLE METRIC DASHBOARD STRIP --- */
+        .metric-strip { background: var(--bg-surface); border-top: 1px solid var(--border-light); border-bottom: 1px solid var(--border-light); padding: 50px 0; backdrop-filter: blur(8px); }
+        .metric-matrix { display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; }
+        .metric-node { padding-left: 24px; border-left: 3px solid var(--brand-primary); position: relative; transition: all 0.3s ease; }
+        .metric-node:hover { border-color: var(--brand-accent); }
+        .metric-val { font-size: 40px; font-weight: 800; color: var(--text-main); font-family: 'Plus Jakarta Sans', sans-serif; line-height: 1.1; margin-bottom: 4px; }
+        .metric-det { font-size: 14px; color: var(--text-muted); font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em;}
+
+        /* --- GRID AND DIVISION METHODOLOGY --- */
+        .section { padding: 120px 0; border-bottom: 1px solid var(--border-light); position: relative; }
+        .section-alt { background-color: var(--bg-surface); }
+        .section-title { margin-bottom: 70px; max-width: 700px; }
+        .section-title h2 { font-size: 42px; color: var(--text-main); margin-bottom: 20px; font-weight: 800; }
+        .section-title p { font-size: 18px; color: var(--text-muted); line-height: 1.7; }
+
+        /* Asymmetric Split Showcase */
+        .split-showcase { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: flex-start; }
+        .showcase-card { margin-bottom: 48px; background: transparent; transition: transform 0.3s ease; }
+        .showcase-card:hover h3 { color: var(--brand-primary); }
+        .showcase-card h3 { font-size: 24px; color: var(--text-main); margin-bottom: 16px; font-weight: 700; border-bottom: 1px solid var(--border-light); padding-bottom: 12px; transition: color 0.3s ease; }
+        .showcase-card p { color: var(--text-muted); font-size: 16px; }
+
+        /* High-Density Specification Callout Grid */
+        .density-grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+        .density-grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+        
+        .datacard-premium { 
+            background: rgba(255, 255, 255, 0.7); 
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border-light); 
+            border-radius: 16px; 
+            padding: 40px 32px; 
+            box-shadow: var(--shadow-sm); 
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); 
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* Subtle Gradient Glow on Hover */
+        .datacard-premium::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at top right, rgba(0, 229, 255, 0.08) 0%, transparent 60%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+        /* --- UPDATED COMPLETE HERO POSITIONING ENGINE --- */
+.hero-section { 
+    position: relative; 
+    padding: 160px 0 140px 0; 
+    overflow: hidden; 
+    background-color: #FFFFFF; /* Fail-safe fallback canvas */
+    width: 100%;
+}
+
+/* Forces the video background container to bind exactly within the hero section limits */
+.video-bg-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+/* Explicit aspect ratio calculations to ensure the video stretches edge-to-edge without shifting */
+.video-bg-container video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    transform: translate(-50%, -50%);
+    object-fit: cover;
+}
+
+/* High-contrast overlay grid layer that sandwich shields text over any video source */
+.video-overlay-tint {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0.65) 100%);
+    z-index: 2;
+}
+
+        .datacard-premium:hover { 
+            border-color: var(--brand-accent); 
+            box-shadow: var(--shadow-md); 
+            transform: translateY(-6px); 
+        }
+        .datacard-premium:hover::before { opacity: 1; }
+        
+        .datacard-premium h3 { font-size: 22px; color: var(--brand-primary); margin-bottom: 14px; font-weight: 700; position: relative; z-index: 1; }
+        .datacard-premium p { color: var(--text-muted); font-size: 16px; position: relative; z-index: 1; }
+
+        /* --- WORKFLOW TIMELINE PROCESS --- */
+        .timeline-matrix { display: grid; grid-template-columns: repeat(5, 1fr); gap: 20px; position: relative; margin-top: 40px; }
+        .timeline-node { position: relative; background: var(--bg-card); border: 1px solid var(--border-light); padding: 32px 24px; border-radius: 12px; box-shadow: var(--shadow-sm); transition: transform 0.3s ease; }
+        .timeline-node:hover { transform: translateY(-4px); border-color: var(--brand-primary); }
+        .timeline-idx { font-size: 14px; font-weight: 700; color: #FFF; background: var(--brand-gradient); padding: 6px 12px; border-radius: 6px; display: inline-block; margin-bottom: 20px; box-shadow: 0 4px 10px rgba(0, 82, 204, 0.2); }
+        .timeline-node h4 { font-size: 18px; margin-bottom: 8px; color: var(--text-main); }
+        .timeline-node p { font-size: 14px; color: var(--text-muted); line-height: 1.5; }
+
+        /* --- PREMIUM B2B DATA MATRIX TABLE --- */
+        .spec-table-container { background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(10px); border: 1px solid var(--border-light); border-radius: 16px; overflow: hidden; box-shadow: var(--shadow-md); margin-top: 40px; }
+        .spec-table { width: 100%; border-collapse: collapse; text-align: left; }
+        .spec-table th { background-color: rgba(248, 250, 252, 0.9); padding: 24px 32px; font-weight: 700; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 14px; color: var(--text-main); border-bottom: 1px solid var(--border-light); text-transform: uppercase; letter-spacing: 0.05em; }
+        .spec-table td { padding: 20px 32px; border-bottom: 1px solid var(--border-light); font-size: 15px; color: var(--text-muted); transition: background 0.2s ease; }
+        .spec-table tr:last-child td { border-bottom: none; }
+        .spec-table tr:hover td { background-color: rgba(0, 229, 255, 0.03); color: var(--text-main); }
+
+        /* --- CONVERSION CLOSING FOOTER --- */
+        .action-footer { background-color: var(--bg-main); padding: 120px 0 60px 0; text-align: center; border-top: 1px solid var(--border-light); position: relative; overflow: hidden; }
+        .action-footer::before {
+            content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 100%; height: 1px;
+            background: linear-gradient(90deg, transparent, var(--brand-accent), transparent);
+        }
+        .action-footer h2 { font-size: 52px; font-weight: 800; color: var(--text-main); margin-bottom: 24px; }
+        .action-footer p { font-size: 19px; color: var(--text-muted); max-width: 640px; margin: 0 auto 48px auto; }
+        .footer-nav { display: flex; justify-content: center; gap: 40px; margin-top: 80px; padding-top: 40px; border-top: 1px solid var(--border-light); }
+        .footer-nav a { text-decoration: none; color: var(--text-muted); font-size: 14px; font-weight: 500; transition: color 0.2s ease; }
+        .footer-nav a:hover { color: var(--brand-primary); }
+
+        @media (max-width: 1024px) {
+            .hero-grid, .split-showcase, .density-grid-3 { grid-template-columns: 1fr; }
+            .metric-matrix { grid-template-columns: repeat(2, 1fr); }
+            .timeline-matrix { grid-template-columns: 1fr; gap: 16px; }
+            .hero-content h1 { font-size: 48px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container nav-container">
+            <div class="logo"><img src="NevarSystems.svg" alt="PHOTON VTOL" height="70px" width="140px"></div>
+            <div class="btn-flex">
+                <a href="#contact" class="btn btn-primary" style="padding: 10px 20px; font-size:14px;">Request Demonstration</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- HERO PANEL WITH GRADIENT TEXT & FLOATING ANIMATION -->
+      
+    <section class="hero-section">
+
+        <div class="video-bg-container">
+            <div class="video-overlay-tint"></div>
+            <!-- Embedded looping video engine asset block -->
+            <video autoplay loop muted playsinline poster="fallback-thumb.jpg">
+                <source src="never_systems.webm" type="video/webm">
+            </video>
+        </div>
+         
+        <div class="container hero-grid">
+            <div class="hero-content">
+                <span class="tagline text-gradient">Sustained VTOL performance for survey, inspection, and aerial data capture.</span>
+                <h1>PHOTON VTOL</h1>
+                <p>Built for long-endurance hybrid flight, the Photon VTOL delivers survey-grade mapping, inspection, and surveillance data with professional reliability.</p>
+                <div class="btn-flex">
+                    <a href="#missions" class="btn btn-primary">Explore Nevar System</a>
+                    <a href="#contact" class="btn btn-primary">Download Specs</a>
+                </div>
+            </div>
+            <!-- <div class="hero-visual">
+                <span style="color: var(--brand-primary); font-weight:600; font-size:14px; letter-spacing:0.05em; text-transform:uppercase;">[ High-Res PHOTONVTOL Render ]</span>
+                <div class="panel-overlay">
+                    <div class="panel-line"></div>
+                    <div style="font-size:11px; text-transform:uppercase; color:var(--brand-primary); font-weight:700; margin-bottom:4px; letter-spacing:0.05em;">Aero Telemetry Active</div>
+                    <div style="font-size:22px; font-weight:800; font-family:'Plus Jakarta Sans'">TRL-8 Verified</div>
+                </div>
+            </div> -->
+            
+        </div>
+    </section>
+
+    
+    <!-- COMPACT HIGH-CONTRAST METRIC MATRIX -->
+    <div class="metric-strip">
+        <div class="container metric-matrix">
+            <div class="metric-node">
+                <div class="metric-val">110 min</div>
+                <div class="metric-det">Flight Endurance</div>
+            </div>
+            <div class="metric-node">
+                <div class="metric-val">4–5 km²</div>
+                <div class="metric-det">Coverage per Flight</div>
+            </div>
+            <div class="metric-node">
+                <div class="metric-val">120 km/h</div>
+                <div class="metric-det">Maximum Speed</div>
+            </div>
+            <div class="metric-node">
+                <div class="metric-val">10 km</div>
+                <div class="metric-det">Communication Range</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ASYMMETRIC SYSTEM OVERVIEW GRID -->
+    <section class="section">
+        <div class="container">
+            <div class="split-showcase">
+                <div class="section-title" style="margin-bottom:0;">
+                    <h2>Built for Greater Possibilities</h2>
+                    <p style="margin-top:20px;">PHOTON VTOL combines the vertical take-off and landing capability of a multirotor with the speed and efficiency of a fixed-wing aircraft. It is engineered to cover large project areas, operate from confined locations and carry multiple professional payloads. From high-accuracy mapping to real-time surveillance, PHOTON helps teams complete demanding missions with greater efficiency.</p>
+                </div>
+                <div>
+                    <div class="showcase-card">
+                        <h3>Vertical Take-off. Fixed-Wing Performance.</h3>
+                        <p>PHOTON takes off vertically, transitions smoothly into efficient forward flight and lands vertically at the mission location. No runway, launcher or complex recovery system is required. This makes the aircraft suitable for deployment in forests, agricultural fields, mining sites, infrastructure corridors and remote terrain.</p>
+                    </div>
+                    <div class="showcase-card">
+                        <h3>Precision in Every Mission</h3>
+                        <p>PHOTON supports GNSS with PPK positioning for improved geospatial accuracy and consistent aerial data collection. Its autonomous mission capability enables precise take-off, flight-path execution, data capture and vertical landing with minimal operator intervention.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FLIGHT RANGE HIGH-DENSITY CARD PANELS -->
+    <section class="section section-alt">
+        <div class="container">
+            <div class="section-title">
+                <h2>110 Minutes of Endurance</h2>
+                <p>Stay in the air. Cover more ground. At an operating altitude of 120 metres, it can map approximately 4–5 km² in a single flight, reducing repeated launches, battery changes and overall field time.</p>
+            </div>
+            <div class="density-grid-3" style="margin-bottom: 80px;">
+                <div class="datacard-premium">
+                    <h3 class="text-gradient">110 min</h3>
+                    <p>Maximum Flight Endurance</p>
+                </div>
+                <div class="datacard-premium">
+                    <h3 class="text-gradient">4–5 km²</h3>
+                    <p>Typical Mapping Coverage</p>
+                </div>
+                <div class="datacard-premium">
+                    <h3 class="text-gradient">19 m/s</h3>
+                    <p>Typical Mapping Speed</p>
+                </div>
+            </div>
+
+            <div class="section-title">
+                <h2>Faster Flight. Larger Coverage.</h2>
+                <p>Designed for efficient operations across demanding project environments, maintaining reliable aerodynamics while reducing overall energy consumption.</p>
+            </div>
+            <div class="density-grid-4">
+                <div class="datacard-premium" style="padding: 30px 24px;">
+                    <h3>120 km/h</h3>
+                    <p>Maximum Speed</p>
+                </div>
+                <div class="datacard-premium" style="padding: 30px 24px;">
+                    <h3>10 km</h3>
+                    <p>Comm Range</p>
+                </div>
+                <div class="datacard-premium" style="padding: 30px 24px;">
+                    <h3>4,000 m</h3>
+                    <p>Altitude AMSL</p>
+                </div>
+                <div class="datacard-premium" style="padding: 30px 24px;">
+                    <h3>Level 6</h3>
+                    <p>Wind Resistance</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- INDUSTRIAL COMPLIANCE STATS -->
+    <section class="section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Lightweight Strength</h2>
+                <p>Constructed using industrial-grade EPP with carbon-fibre reinforcement, providing an effective balance of strength, low weight and operational durability. Its detachable wings, arms and tail sections make the aircraft easy to transport, assemble and deploy at project locations.</p>
+            </div>
+            <div class="density-grid-4">
+                <div class="datacard-premium"><h3>2,200 mm</h3><p>Wingspan Specs</p></div>
+                <div class="datacard-premium"><h3>1,300 mm</h3><p>Aircraft Length</p></div>
+                <div class="datacard-premium"><h3>6.7 kg</h3><p>Max Take-off Weight</p></div>
+                <div class="datacard-premium"><h3>1 kg</h3><p>Max Payload Capacity</p></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MODULAR TARGET GRID LAYER -->
+    <section class="section section-alt" id="missions">
+        <div class="container">
+            <div class="section-title">
+                <h2>One Aircraft. Multiple Missions.</h2>
+                <p>PHOTON features a modular payload system that allows operators to configure the aircraft according to different project requirements. Payloads can be quickly interchanged, enabling a single aircraft to support mapping, inspection, monitoring and surveillance operations.</p>
+            </div>
+            <div class="density-grid-3">
+                <div class="datacard-premium">
+                    <h3>High-Resolution RGB Mapping</h3>
+                    <p>Capture detailed aerial imagery for orthomosaic generation, topographic mapping, digital surface models, contours and 3D reconstruction.</p>
+                </div>
+                <div class="datacard-premium">
+                    <h3>LiDAR Mapping</h3>
+                    <p>Generate dense point clouds and accurate terrain information for forestry, infrastructure, mining and complex landscape surveys.</p>
+                </div>
+                <div class="datacard-premium">
+                    <h3>Multispectral Monitoring</h3>
+                    <p>Collect multispectral data for crop-health assessment, vegetation analysis, environmental monitoring and precision agriculture.</p>
+                </div>
+                <div class="datacard-premium">
+                    <h3>EO/IR Surveillance</h3>
+                    <p>Perform day-and-night aerial monitoring, thermal inspection, security surveillance and emergency-response operations.</p>
+                </div>
+                <div class="datacard-premium">
+                    <h3>Oblique Mapping</h3>
+                    <p>Capture angled imagery for detailed 3D modelling of buildings, structures, industrial facilities and urban environments.</p>
+                </div>
+                <div class="datacard-premium">
+                    <h3>Enterprise Scope</h3>
+                    <p>Configured dynamically to perform complex structural mapping over roads, railways, pipelines, transmission corridors, and changing topography lines.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SEQUENTIAL DEPLOYMENT MATRIX -->
+    <section class="section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Simple Deployment. Powerful Performance.</h2>
+                <p>The Nevar system is designed for efficient operation from preparation to mission completion.</p>
+            </div>
+            <div class="timeline-matrix">
+                <div class="timeline-node">
+                    <div class="timeline-idx">01</div>
+                    <h4>Prepare</h4>
+                    <p>Assemble the aircraft and install the required payload.</p>
+                </div>
+                <div class="timeline-node">
+                    <div class="timeline-idx">02</div>
+                    <h4>Configure</h4>
+                    <p>Set the mission area, altitude, flight path and data-capture requirements.</p>
+                </div>
+                <div class="timeline-node">
+                    <div class="timeline-idx">03</div>
+                    <h4>Launch</h4>
+                    <p>Perform a fully autonomous vertical take-off from the project location.</p>
+                </div>
+                <div class="timeline-node">
+                    <div class="timeline-idx">04</div>
+                    <h4>Capture</h4>
+                    <p>Collect accurate mapping, inspection or surveillance data across the mission area.</p>
+                </div>
+                <div class="timeline-node">
+                    <div class="timeline-idx">05</div>
+                    <h4>Return</h4>
+                    <p>Complete the mission with autonomous return and vertical landing.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SPECIFICATION DATA MATRIX SHEET -->
+    <section class="section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Performance at a Glance</h2>
+                <p>Full technical data specification ledger for Nevar Systems compliance reviews.</p>
+            </div>
+            <div class="spec-table-container">
+                <table class="spec-table">
+                    <thead>
+                        <tr>
+                            <th>Parameter</th>
+                            <th>Specification</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Platform Type</td><td>Hybrid Fixed-Wing VTOL</td></tr>
+                        <tr><td>Motor Configuration</td><td>4 Vertical Lift Motors + 1 Forward Motor</td></tr>
+                        <tr><td>Airframe Construction</td><td>Industrial-Grade EPP with Carbon-Fibre Reinforcement</td></tr>
+                        <tr><td>Wingspan / Length</td><td>2,200 mm / 1,300 mm</td></tr>
+                        <tr><td>Maximum Take-off Weight</td><td>6.7 kg</td></tr>
+                        <tr><td>Maximum Payload Capacity</td><td>Up to 1 kg</td></tr>
+                        <tr><td>Maximum Flight Endurance</td><td>Up to 110 Minutes</td></tr>
+                        <tr><td>Maximum Flight Speed</td><td>Up to 120 km/h</td></tr>
+                        <tr><td>Communication Range</td><td>Up to 10 km</td></tr>
+                        <tr><td>Maximum Operating Altitude</td><td>Up to 4,000 m AMSL</td></tr>
+                        <tr><td>Wind Resistance</td><td>Level 6</td></tr>
+                        <tr><td>Navigation System</td><td>GNSS with PPK Positioning</td></tr>
+                        <tr><td>Take-off and Landing</td><td>Fully Autonomous Vertical Take-off and Landing</td></tr>
+                    </tbody>
+                </table>
+            </div>      
+        </div>
+    </section>
+
+    <!-- ENTERPRISE CONVERSION GATEWAY -->
+    <section class="action-footer" id="contact">
+        <div class="container">
+            <h2 class="text-gradient">Take Your Operations Beyond the Horizon</h2>
+            <p>Nevar Systems provides the endurance, flexibility and efficiency required for complex aerial operations. Long Endurance. Intelligent Flight. Multiple Possibilities.</p>
+            <div class="btn-flex" style="justify-content: center;">
+                <a href="#" class="btn btn-primary">Request a Demonstration</a>
+                <a href="#" class="btn btn-secondary">Download Brochure</a>
+            </div>
+            <div class="footer-nav">
+                <a href="#">Contact Nevar Systems</a>
+                <a href="#">Security & Regulatory Compliance</a>
+                <a href="#">Data Privacy Shield</a>
+            </div>
+        </div>
+    </section>
+
+</body>
+</html>
